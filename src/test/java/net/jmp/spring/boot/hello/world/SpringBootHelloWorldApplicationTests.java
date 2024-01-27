@@ -1,10 +1,11 @@
 package net.jmp.spring.boot.hello.world;
 
 /*
+ * (#)SpringBootHelloWorldApplicationTests.java	0.3.0   01/27/2024
  * (#)SpringBootHelloWorldApplicationTests.java	0.1.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.1.0
+ * @version   0.3.0
  * @since     0.1.0
  *
  * MIT License
@@ -30,17 +31,25 @@ package net.jmp.spring.boot.hello.world;
  * SOFTWARE.
  */
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class SpringBootHelloWorldApplicationTests {
+	@Autowired
+	private GreetingController controller;
+
 	SpringBootHelloWorldApplicationTests() {
 		super();
 	}
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception {
+		assertThat(controller).isNotNull();
 	}
 }
