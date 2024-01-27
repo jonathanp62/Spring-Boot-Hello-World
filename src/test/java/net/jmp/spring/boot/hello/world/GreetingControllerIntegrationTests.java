@@ -1,7 +1,7 @@
 package net.jmp.spring.boot.hello.world;
 
 /*
- * (#)GreetingControllIntegrationTests.java 0.3.0   01/27/2024
+ * (#)GreetingControllerIntegrationTests.java 0.3.0 01/27/2024
  *
  * @author    Jonathan Parker
  * @version   0.3.0
@@ -43,8 +43,21 @@ import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class GreetingControllIntegrationTests {
+class GreetingControllerIntegrationTests {
     @Autowired
     private TestRestTemplate template;
 
+    @Test
+    void testDefault() throws Exception {
+        final ResponseEntity<String> response = template.getForEntity("/greeting", String.class);
+
+        assertThat(response.getBody()).contains("Hello from Spring Boot, World!");
+    }
+
+    @Test
+    void testWithName() throws Exception {
+        final ResponseEntity<String> response = template.getForEntity("/greeting?name=Unit-Test", String.class);
+
+        assertThat(response.getBody()).contains("Hello from Spring Boot, Unit-Test!");
+    }
 }
